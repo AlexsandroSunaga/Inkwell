@@ -1,0 +1,6 @@
+# GitHub Linguist: keep Python API visible alongside the Next.js app
+backend/** linguist-detectable=true
+frontend/** linguist-detectable=true
+app/** linguist-documentation
+data/** linguist-documentation
+LEGACY.md linguist-documentation

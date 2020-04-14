@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.local
+*.db
+**/data/*.db
+.DS_Store
