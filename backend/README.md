@@ -2,6 +2,8 @@
 
 Product backend: documents, embeddings, chat sessions, OpenAI integration.
 
+**Layout:** `app/api/routes/*` (routers), `app/services/*` (RAG + ingest), `app/schemas/*` (Pydantic), request-id middleware, structured logging.
+
 ```bash
 cd backend
 python -m venv .venv
