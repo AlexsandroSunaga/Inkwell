@@ -10,7 +10,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-React-3178C6?logo=typescript&logoColor=white)
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-SQLite-red)
 
-Split **product** architecture — not a single demo `page.tsx`.
+Split **product** architecture: dedicated `frontend/` and `backend/` services.
 
 **GitHub topics:** `rag`, `llm`, `openai`, `fastapi`, `embeddings`, `semantic-search`, `nextjs`, `sqlalchemy`
 
@@ -20,7 +20,7 @@ Split **product** architecture — not a single demo `page.tsx`.
 | **Backend** | `backend/` | FastAPI — REST API, SQLAlchemy DB, ingestion, retrieval, chat |
 | **Third-party** | OpenAI | Embeddings (`text-embedding-3-small`) + chat (`gpt-4o-mini`) via HTTPS API |
 
-Legacy v1 demo (single Next file) remains in repo root `app/` — **use `frontend/` + `backend/`** for portfolio bids.
+Legacy v1 single-file UI remains in repo root `app/` for reference — **use `frontend/` + `backend/`** for development.
 
 ## Run locally
 
@@ -51,7 +51,7 @@ npm run dev
 - **Assistant**: retrieval pipeline steps, suggestion chips, model selector, citation chips, **evidence inspector** with scores
 - **Knowledge base**: category cards, ingest tab, table/grid toggle, bulk select, pagination, status badges
 - **Analytics**: tabs (usage / corpus / **content gaps**), area + bar charts
-- **Audit log** + **Team & roles** (demo data for enterprise narrative)
+- **Audit log** + **Team & roles** (sample data for enterprise workflows)
 - **Settings** + **Integrations** (OpenAI status, server-side keys)
 - **Backend**: FastAPI + SQLAlchemy + OpenAI embeddings/chat + `/analytics`
 
