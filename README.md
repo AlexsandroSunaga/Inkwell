@@ -66,7 +66,7 @@ npm run dev
 
 ## Not included (typical client work)
 
-Clerk/Auth0 SSO, Stripe billing, pgvector at scale, S3, multi-tenant RBAC — add per engagement; say so on Upwork calls.
+Clerk/Auth0 SSO, Stripe billing, pgvector at scale, S3, multi-tenant RBAC — typically scoped per deployment.
 
 ## Deploy
 
