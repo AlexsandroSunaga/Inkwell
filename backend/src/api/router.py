@@ -1,9 +1,10 @@
 from fastapi import APIRouter
 
-from src.api.routes import analytics, chat, documents, health, sessions
+from src.api.routes import analytics, chat, documents, health, integrations, sessions
 
 api_router = APIRouter()
 api_router.include_router(health.router)
+api_router.include_router(integrations.router)
 api_router.include_router(documents.router)
 api_router.include_router(sessions.router)
 api_router.include_router(analytics.router)
