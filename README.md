@@ -1,4 +1,4 @@
-# ACME Knowledge Cloud
+# Inkwell
 
 **RAG · LLM · semantic search · cited answers**
 
@@ -20,7 +20,6 @@ Split **product** architecture: dedicated `frontend/` and `backend/` services.
 | **Backend** | `backend/` | FastAPI — REST API, SQLAlchemy DB, ingestion, retrieval, chat |
 | **Third-party** | OpenAI | Embeddings (`text-embedding-3-small`) + chat (`gpt-4o-mini`) via HTTPS API |
 
-Legacy v1 single-file UI remains in repo root `app/` for reference — **use `frontend/` + `backend/`** for development.
 
 ## Run locally
 

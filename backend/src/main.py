@@ -11,7 +11,7 @@ from src.config.manager import get_settings
 from src.db import init_db
 from src.utilities.logging import configure_logging
 
-logger = logging.getLogger("acme.knowledge")
+logger = logging.getLogger("inkwell")
 
 
 @asynccontextmanager
@@ -20,7 +20,7 @@ async def lifespan(_: FastAPI):
     configure_logging("INFO")
     Path("data").mkdir(exist_ok=True)
     init_db()
-    logger.info("ACME Knowledge API ready (openai=%s)", bool(settings.openai_api_key))
+    logger.info("Inkwell API ready (openai=%s)", bool(settings.openai_api_key))
     yield
 
 

@@ -12,7 +12,7 @@ from src.services.openai_client import openai_client
 from src.services.retrieval import citations_payload, retrieve
 
 router = APIRouter(tags=["chat"])
-logger = logging.getLogger("acme.knowledge.chat")
+logger = logging.getLogger("inkwell.chat")
 
 
 @router.post("/chat")
@@ -36,7 +36,7 @@ async def chat(body: ChatRequest, db: Session = Depends(get_db)) -> dict:
     hits = retrieve(db, query_vec, top_k=5)
     context = "\n\n".join(f"[{i+1}] {h['text']}" for i, h in enumerate(hits))
     system = (
-        "You are ACME Corp's internal knowledge assistant. Answer only from sources. "
+        "You are Halden Labs's internal knowledge assistant. Answer only from sources. "
         "Cite with [1], [2], etc. If unknown, say so."
     )
     user = f"Sources:\n{context}\n\nQuestion: {message}"

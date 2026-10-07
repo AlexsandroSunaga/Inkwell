@@ -23,7 +23,7 @@ export function AppSidebar({ mobile }: { mobile?: boolean }) {
       <div className={cn("p-4 border-b border-slate-800/80", collapsed && "px-2")}>
         {!collapsed && (
           <>
-            <p className="text-[10px] font-semibold text-indigo-400 tracking-widest uppercase">ACME Corp</p>
+            <p className="text-[10px] font-semibold text-indigo-400 tracking-widest uppercase">Halden Labs</p>
             <h2 className="text-base font-semibold text-white mt-0.5">Knowledge Cloud</h2>
           </>
         )}

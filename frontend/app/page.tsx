@@ -42,7 +42,7 @@ const features = [
 const logos = ["Northwind", "Helio Labs", "Packet", "Studio 14", "Meridian"];
 
 const faq = [
-  { q: "Is this a real company product?", a: "No — ACME is synthetic. The architecture and UI are original portfolio work by Alexsandro Sunaga." },
+  { q: "Is this a real company product?", a: "No — Halden Labs is synthetic. The architecture and UI are original portfolio work by Alexsandro Sunaga." },
   { q: "What makes the UI “senior”?", a: "Multi-route console, grouped sidebar, evidence inspector, KB admin tables, analytics tabs, and mobile nav — not a single demo page." },
   { q: "Can I see the API?", a: "Yes. FastAPI exposes documents, sessions, chat, and analytics. The frontend is a separate Next app." },
 ];
@@ -55,7 +55,7 @@ export default function MarketingPage() {
 
       <header className="relative z-10 max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
         <div>
-          <p className="text-xs uppercase tracking-widest text-indigo-400 font-medium">ACME Corp</p>
+          <p className="text-xs uppercase tracking-widest text-indigo-400 font-medium">Halden Labs</p>
           <p className="font-semibold text-lg">Knowledge Cloud</p>
         </div>
         <nav className="hidden md:flex gap-6 text-sm text-slate-400">
@@ -157,7 +157,7 @@ export default function MarketingPage() {
       </section>
 
       <footer className="relative z-10 border-t border-slate-800 py-8 text-center text-sm text-slate-500">
-        Synthetic ACME data · UI references: shadcn-admin, KB admin kits, RAG frontend architecture guides
+        Synthetic Halden data · UI references: shadcn-admin, KB admin kits, RAG frontend architecture guides
       </footer>
     </div>
   );

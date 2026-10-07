@@ -16,7 +16,7 @@ export function ProductPreview() {
           <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-          <span className="ml-3 text-xs text-slate-500 font-mono">app.acme-knowledge.cloud/dashboard</span>
+          <span className="ml-3 text-xs text-slate-500 font-mono">app.inkwell.example/dashboard</span>
         </div>
         <div className="grid grid-cols-12 min-h-[320px] text-[10px] sm:text-xs">
           <div className="col-span-3 border-r border-slate-800 p-3 space-y-2 bg-slate-950/50 hidden sm:block">

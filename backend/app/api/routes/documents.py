@@ -10,7 +10,7 @@ from app.services.ingest import chunk_text, extract_text
 from app.services.openai_client import openai_client
 
 router = APIRouter(tags=["documents"])
-logger = logging.getLogger("acme.knowledge.documents")
+logger = logging.getLogger("inkwell.documents")
 
 
 @router.get("/documents")

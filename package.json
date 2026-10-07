@@ -1,8 +1,8 @@
 {
-  "name": "acme-knowledge-assistant",
+  "name": "inkwell",
   "version": "2.0.0",
   "private": true,
-  "description": "Use frontend/ + backend/ — root app/ is legacy v1 only.",
+  "description": "RAG knowledge assistant: Next.js frontend + FastAPI backend.",
   "scripts": {
     "install:frontend": "npm install --prefix frontend",
     "install:all": "npm install --prefix frontend",

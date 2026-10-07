@@ -1,4 +1,4 @@
-# ACME Knowledge API (FastAPI)
+# Inkwell API (FastAPI)
 
 Product backend: documents, embeddings, chat sessions, OpenAI integration.
 

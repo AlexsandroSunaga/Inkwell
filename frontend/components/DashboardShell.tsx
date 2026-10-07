@@ -17,7 +17,7 @@ export function DashboardShell({
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex">
       <aside className="w-56 border-r border-slate-800 p-4 space-y-2">
-        <p className="text-xs text-slate-500 uppercase tracking-wide">ACME Knowledge</p>
+        <p className="text-xs text-slate-500 uppercase tracking-wide">Inkwell</p>
         <p className="font-semibold text-sm mb-4">Product console</p>
         {links.map((l) => (
           <Link

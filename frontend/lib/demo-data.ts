@@ -16,9 +16,9 @@ export const auditEvents = [
 ];
 
 export const teamMembers = [
-  { id: 1, name: "Alexsandro Sunaga", email: "alex@acme.internal", role: "Owner", status: "active" },
-  { id: 2, name: "M. Chen", email: "m.chen@acme.internal", role: "Editor", status: "active" },
-  { id: 3, name: "Ops Bot", email: "ops@acme.internal", role: "Viewer", status: "invited" },
+  { id: 1, name: "Alexsandro Sunaga", email: "alex@halden.example", role: "Owner", status: "active" },
+  { id: 2, name: "M. Chen", email: "m.chen@halden.example", role: "Editor", status: "active" },
+  { id: 3, name: "Ops Bot", email: "ops@halden.example", role: "Viewer", status: "invited" },
 ];
 
 export const kbCategories = [
