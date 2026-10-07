@@ -1,5 +1,14 @@
 # Inkwell
 
+## Screenshots
+
+![Inkwell landing page](docs/screenshots/01-landing.png)
+![Overview dashboard](docs/screenshots/02-dashboard.png)
+![RAG assistant with retrieval pipeline](docs/screenshots/03-assistant.png)
+![Knowledge base document table](docs/screenshots/04-knowledge-base.png)
+![Analytics](docs/screenshots/05-analytics.png)
+
+
 **RAG · LLM · semantic search · cited answers**
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
@@ -71,3 +80,13 @@ Clerk/Auth0 SSO, Stripe billing, pgvector at scale, S3, multi-tenant RBAC — ty
 
 - Frontend → Vercel (`NEXT_PUBLIC_API_URL` → your API host)
 - Backend → Railway / Fly / Render with `OPENAI_API_KEY` + persistent volume for SQLite (or swap `DATABASE_URL` to Postgres)
+
+## Tests
+
+Tests run without an OpenAI key (AI endpoints are asserted to degrade to a clear 503) and use a throwaway SQLite database.
+
+```bash
+cd backend
+pip install -r requirements.txt -r requirements-dev.txt
+python -m pytest -q
+```
