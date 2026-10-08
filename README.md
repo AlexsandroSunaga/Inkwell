@@ -96,3 +96,11 @@ cd backend
 pip install -r requirements.txt -r requirements-dev.txt
 python -m pytest -q
 ```
+
+## Author
+
+**Alexsandro Sunaga**
+
+## License
+
+MIT License — Copyright (c) 2026 Alexsandro Sunaga. See the license section in this repository for full terms.
