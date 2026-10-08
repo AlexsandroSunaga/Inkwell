@@ -36,6 +36,13 @@ Split **product** architecture: dedicated `frontend/` and `backend/` services.
 | **Third-party** | OpenAI | Embeddings (`text-embedding-3-small`) + chat (`gpt-4o-mini`) via HTTPS API |
 
 
+## Tech stack
+
+| Area | Technologies |
+|------|--------------|
+| Frontend | `Next.js`, `React`, `TypeScript`, `Tailwind CSS`, `Radix UI`, `Framer Motion`, `Recharts`, `cmdk` |
+| Backend | `Python`, `FastAPI`, `OpenAI embeddings`, `pypdf`, `SQLAlchemy`, `Pydantic Settings`, `pytest` |
+
 ## Run locally
 
 ```bash
