@@ -1,5 +1,11 @@
 # Inkwell
 
+## Demo
+
+[![Inkwell demo](docs/demo/demo.gif)](docs/demo/demo.mp4)
+
+The video walks through the landing page, overview dashboard, knowledge base and analytics (usage, corpus, content gaps) using seeded sample data; chat and ingestion call the OpenAI API and are not shown. [Watch the MP4](docs/demo/demo.mp4).
+
 ## Screenshots
 
 ![Inkwell landing page](docs/screenshots/01-landing.png)
