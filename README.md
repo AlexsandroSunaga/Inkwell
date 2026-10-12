@@ -1,6 +1,6 @@
 # Inkwell
 
-## Demo
+## Video
 
 [![Inkwell demo](docs/demo/demo.gif)](docs/demo/demo.mp4)
 
