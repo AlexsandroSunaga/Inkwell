@@ -7,7 +7,6 @@ import { TopBar } from "@/components/layout/TopBar";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { api, type DocumentRow } from "@/lib/api";
-import { kbCategories } from "@/lib/demo-data";
 import { cn } from "@/lib/cn";
 
 const PAGE_SIZE = 8;
@@ -37,13 +36,15 @@ export default function DocumentsPage() {
     return docs.filter((d) => d.title.toLowerCase().includes(q) || d.filename.toLowerCase().includes(q));
   }, [docs, query]);
 
+  const totalChunks = docs.reduce((sum, d) => sum + d.chunkCount, 0);
+  const latest = docs.reduce<string | null>((max, d) => (max === null || d.createdAt > max ? d.createdAt : max), null);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const pageRows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   async function upload() {
     if (!file) return;
     setLoading(true);
-    setStatus("Chunking → embedding via OpenAI…");
+    setStatus("Splitting into passages and indexing…");
     try {
       const res = await api.uploadDocument(file);
       setStatus(`Indexed ${res.chunks} chunks · document #${res.documentId}`);
@@ -73,25 +74,20 @@ export default function DocumentsPage() {
     <>
       <TopBar
         title="Knowledge base"
-        subtitle="Category overview · ingestion pipeline · operational document table"
+        subtitle="Your documents · upload and index files · remove what is out of date"
         breadcrumbs={[{ label: "Intelligence", href: "/dashboard/analytics" }, { label: "Documents" }]}
       />
       <div className="p-4 sm:p-6 space-y-6">
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
-          {kbCategories.map((cat) => (
-            <div key={cat.id} className="glass rounded-xl p-4 hover:border-indigo-500/30 transition-colors cursor-default">
-              <div className="flex justify-between items-start">
-                <span className="text-2xl">{cat.icon}</span>
-                <Badge
-                  variant={
-                    cat.health === "good" ? "success" : cat.health === "review" ? "warning" : "danger"
-                  }
-                >
-                  {cat.health}
-                </Badge>
-              </div>
-              <p className="font-medium mt-3">{cat.name}</p>
-              <p className="text-xs text-slate-500 mt-1">{cat.articles} articles · demo taxonomy</p>
+          {[
+            { label: "Documents", value: docs.length },
+            { label: "Passages indexed", value: totalChunks },
+            { label: "Passages per document", value: docs.length ? (totalChunks / docs.length).toFixed(1) : "0" },
+            { label: "Last upload", value: latest ? new Date(latest).toLocaleDateString() : "none yet" },
+          ].map((card) => (
+            <div key={card.label} className="glass rounded-xl p-4">
+              <p className="text-xs text-slate-500 uppercase tracking-wide">{card.label}</p>
+              <p className="text-2xl font-semibold mt-2">{card.value}</p>
             </div>
           ))}
         </div>

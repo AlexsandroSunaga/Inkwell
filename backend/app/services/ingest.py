@@ -1,4 +1,6 @@
 import io
+import re
+
 from pypdf import PdfReader
 
 
@@ -10,7 +12,9 @@ def extract_text(filename: str, raw: bytes) -> str:
         for page in reader.pages:
             parts.append(page.extract_text() or "")
         return "\n\n".join(parts).strip()
-    return raw.decode("utf-8", errors="replace").strip()
+    text = raw.decode("utf-8", errors="replace").strip()
+    # Markdown headings become their own short sentence instead of gluing onto the next one.
+    return re.sub(r"^#+\s*(.+?)\s*$", r".", text, flags=re.MULTILINE)
 
 
 def chunk_text(text: str, size: int = 800, overlap: int = 120) -> list[str]:

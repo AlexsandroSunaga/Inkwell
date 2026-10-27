@@ -25,7 +25,7 @@ export default function ChatWorkspacePage() {
   const [lastRetrieval, setLastRetrieval] = useState<RetrievalRow[]>([]);
   const [highlightChunk, setHighlightChunk] = useState<number | null>(null);
   const [error, setError] = useState("");
-  const [model, setModel] = useState("gpt-4o-mini");
+  const [mode, setMode] = useState<"openai" | "local" | null>(null);
 
   const loadSessions = useCallback(() => {
     api.listSessions().then(setSessions).catch(() => setSessions([]));
@@ -33,6 +33,7 @@ export default function ChatWorkspacePage() {
 
   useEffect(() => {
     loadSessions();
+    api.health().then((h) => setMode(h.mode)).catch(() => setMode(null));
   }, [loadSessions]);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export default function ChatWorkspacePage() {
     try {
       const res = await runPipelineThenChat(msg);
       setActiveId(res.sessionId);
+      setMode(res.mode);
       setLastCitations(res.citations);
       setLastRetrieval(res.retrieval ?? []);
       setMessages((m) => [
@@ -104,7 +106,7 @@ export default function ChatWorkspacePage() {
     <>
       <TopBar
         title="Assistant"
-        subtitle="Three-pane RAG workspace · history · chat · evidence inspector"
+        subtitle="Ask a question · every answer cites its sources"
         breadcrumbs={[{ label: "Workspace", href: "/dashboard" }, { label: "Assistant" }]}
       />
       <div className="flex flex-1 min-h-0 h-[calc(100vh-4.5rem)]">
@@ -160,15 +162,10 @@ export default function ChatWorkspacePage() {
           <div className="px-4 py-2 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2 text-slate-500">
               <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-              Model
-              <select
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-                className="rounded-md bg-slate-900 border border-slate-700 px-2 py-1 text-slate-300"
-              >
-                <option value="gpt-4o-mini">gpt-4o-mini</option>
-                <option value="gpt-4o">gpt-4o</option>
-              </select>
+              {mode === "openai" && <Badge variant="success">OpenAI answers</Badge>}
+              {mode === "local" && (
+                <Badge variant="outline">Local mode: quotes the best-matching passages, no OpenAI key</Badge>
+              )}
               <Badge variant="outline">Top-k: 5</Badge>
             </div>
             {loading && pipelineStep >= 0 && <RetrievalPipeline activeStep={pipelineStep} />}
@@ -177,9 +174,9 @@ export default function ChatWorkspacePage() {
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
             {messages.length === 0 && (
               <div className="max-w-xl mx-auto text-center mt-12 sm:mt-20">
-                <p className="text-lg font-medium text-slate-300">Ask with inspectable evidence</p>
+                <p className="text-lg font-medium text-slate-300">Ask your documents</p>
                 <p className="text-sm text-slate-500 mt-2">
-                  Inspired by production RAG consoles: retrieval steps, ranked chunks, and inline citations.
+                  Every answer shows the passages it came from and how closely they matched.
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 mt-8">
                   {suggestedPrompts.map((p) => (

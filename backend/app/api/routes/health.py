@@ -11,6 +11,7 @@ def health() -> dict:
         "status": "ok",
         "version": "2.1.0",
         "openaiConfigured": bool(settings.openai_api_key),
+        "mode": "openai" if settings.openai_api_key else "local",
         "chatModel": settings.openai_chat_model,
         "embedModel": settings.openai_embed_model,
     }
@@ -22,7 +23,7 @@ def integrations() -> dict:
         "providers": [
             {
                 "name": "OpenAI",
-                "purpose": "Embeddings + chat completions",
+                "purpose": "Embeddings + chat completions (without a key the app runs in local mode)",
                 "docs": "https://platform.openai.com/docs",
                 "configured": bool(settings.openai_api_key),
             }

@@ -14,8 +14,10 @@ def retrieve(db: Session, query_embedding: list[float], top_k: int = 5) -> list[
         scored.append((cosine_similarity(query_embedding, emb), row))
     scored.sort(key=lambda x: x[0], reverse=True)
     out = []
+    best = scored[0][0] if scored else 0.0
     for score, row in scored[:top_k]:
-        if score <= 0:
+        # Drop weak matches: anything well below the best one is noise in the evidence list.
+        if score <= 0 or score < best * 0.4:
             continue
         out.append(
             {

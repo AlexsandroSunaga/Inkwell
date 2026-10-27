@@ -1,47 +1,40 @@
 # Inkwell
 
-## Video
-
-[![Inkwell demo](docs/demo/demo.gif)](docs/demo/demo.mp4)
-
-The video walks through the landing page, overview dashboard, knowledge base and analytics (usage, corpus, content gaps) using seeded sample data; chat and ingestion call the OpenAI API and are not shown. [Watch the MP4](docs/demo/demo.mp4).
-
-## Screenshots
-
-![Inkwell landing page](docs/screenshots/01-landing.png)
-![Overview dashboard](docs/screenshots/02-dashboard.png)
-![RAG assistant with retrieval pipeline](docs/screenshots/03-assistant.png)
-![Knowledge base document table](docs/screenshots/04-knowledge-base.png)
-![Analytics](docs/screenshots/05-analytics.png)
-
-
-**RAG · LLM · semantic search · cited answers**
+Ask your documents, get answers with sources. Upload policies or handbooks, ask questions in plain language, and see the passages each answer came from with a match score.
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)
-![OpenAI](https://img.shields.io/badge/OpenAI-embeddings%20%2B%20chat-412991)
-![RAG](https://img.shields.io/badge/RAG-retrieval%20augmented-6366f1)
 ![Next.js](https://img.shields.io/badge/Next.js-15-000?logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-React-3178C6?logo=typescript&logoColor=white)
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-SQLite-red)
 
-Split **product** architecture: dedicated `frontend/` and `backend/` services.
+## Video
 
-**GitHub topics:** `rag`, `llm`, `openai`, `fastapi`, `embeddings`, `semantic-search`, `nextjs`, `sqlalchemy`
+[![Inkwell demo](docs/demo/demo.gif)](docs/demo/demo.mp4)
 
-| Layer | Folder | Role |
-|-------|--------|------|
-| **Frontend** | `frontend/` | Next.js + React + Tailwind — marketing, dashboard, chat, documents, integrations |
-| **Backend** | `backend/` | FastAPI — REST API, SQLAlchemy DB, ingestion, retrieval, chat |
-| **Third-party** | OpenAI | Embeddings (`text-embedding-3-small`) + chat (`gpt-4o-mini`) via HTTPS API |
+50 seconds, recorded from the running app in local mode (no OpenAI key): the landing page, two questions answered from the sample documents with their sources, uploading a new file, and asking about it. [Watch the MP4](docs/demo/demo.mp4).
 
+## Screenshots
 
-## Tech stack
+![Landing page](docs/screenshots/01-landing.png)
+![Overview](docs/screenshots/02-dashboard.png)
+![Assistant with the evidence panel](docs/screenshots/03-assistant.png)
+![Knowledge base](docs/screenshots/04-knowledge-base.png)
+![Analytics](docs/screenshots/05-analytics.png)
 
-| Area | Technologies |
-|------|--------------|
-| Frontend | `Next.js`, `React`, `TypeScript`, `Tailwind CSS`, `Radix UI`, `Framer Motion`, `Recharts`, `cmdk` |
-| Backend | `Python`, `FastAPI`, `OpenAI embeddings`, `pypdf`, `SQLAlchemy`, `Pydantic Settings`, `pytest` |
+## Two modes
+
+| | Local mode (no key) | OpenAI mode (`OPENAI_API_KEY` set) |
+|---|---|---|
+| Embeddings | Hashed word vectors, computed in Python | `text-embedding-3-small` |
+| Answer | Quotes the best-matching sentences from the retrieved passages, with `[1]` source markers | `gpt-4o-mini` writes the answer from the retrieved passages |
+| Good for | Trying the whole app with no account | Questions that do not share words with the text |
+
+Local mode matches on words (with a short synonym list), so it can miss a question phrased very differently from the document. It never invents text, because it only quotes. The console shows which mode is active.
+
+Vectors from different modes cannot be compared. If you add a key after uploading files in local mode, upload them again.
+
+The first start loads three made-up documents (a handbook, a security policy and a refund policy for the fictional company Halden Labs). Set `SEED_SAMPLES=false` to start empty.
 
 ## Run locally
 
@@ -51,7 +44,7 @@ cd backend
 python -m venv .venv
 .venv\Scripts\activate   # Windows
 pip install -r requirements.txt
-copy .env.example .env   # add OPENAI_API_KEY
+copy .env.example .env   # OPENAI_API_KEY is optional
 uvicorn app.main:app --reload --app-dir .
 
 # Frontend
@@ -61,39 +54,37 @@ copy .env.example .env.local
 npm run dev
 ```
 
-- UI: http://localhost:3000  
-- API: http://localhost:8000/docs  
+- UI: http://localhost:3000
+- API: http://localhost:8000/docs
 
-## Product features (v2 — senior UI)
+## What is in it
 
-- **Marketing**: hero, product browser mock, logo row, pricing block, FAQ
-- **Shell**: grouped sidebar (workspace / intelligence / admin), collapse, **⌘K command palette** (`cmdk`), mobile drawer, breadcrumbs, notification menu
-- **Overview**: review alerts, stuck-draft counters, recent audit feed
-- **Assistant**: retrieval pipeline steps, suggestion chips, model selector, citation chips, **evidence inspector** with scores
-- **Knowledge base**: category cards, ingest tab, table/grid toggle, bulk select, pagination, status badges
-- **Analytics**: tabs (usage / corpus / **content gaps**), area + bar charts
-- **Audit log** + **Team & roles** (sample data for enterprise workflows)
-- **Settings** + **Integrations** (OpenAI status, server-side keys)
-- **Backend**: FastAPI + SQLAlchemy + OpenAI embeddings/chat + `/analytics`
+- **Assistant**: suggested questions, source markers on every answer, an evidence panel with ranked passages and scores, session history
+- **Knowledge base**: upload PDF, Markdown or text files, passage counts, delete
+- **Analytics**: usage and corpus charts (some charts show sample data and say so)
+- **Audit log, team and roles**: screens with sample data, not connected to the API
+- **Backend**: FastAPI, SQLAlchemy, SQLite by default, `/chat`, `/documents`, `/sessions`, `/analytics`, `/health`
 
-## Not included (typical client work)
+## Limits
 
-Clerk/Auth0 SSO, Stripe billing, pgvector at scale, S3, multi-tenant RBAC — typically scoped per deployment.
+- Retrieval loads every stored passage and ranks it in Python (embeddings are kept as JSON in SQLite). That is fine for a few thousand passages, and it is not a vector database.
+- No login, SSO, billing or multi-tenant roles.
+- The audit log and team screens are static sample data.
 
 ## Deploy
 
-- Frontend → Vercel (`NEXT_PUBLIC_API_URL` → your API host)
-- Backend → Railway / Fly / Render with `OPENAI_API_KEY` + persistent volume for SQLite (or swap `DATABASE_URL` to Postgres)
+- Frontend: Vercel, with `NEXT_PUBLIC_API_URL` pointing at the API
+- Backend: Railway, Fly or Render, with a persistent volume for SQLite (or set `DATABASE_URL` to Postgres)
 
 ## Tests
-
-Tests run without an OpenAI key (AI endpoints are asserted to degrade to a clear 503) and use a throwaway SQLite database.
 
 ```bash
 cd backend
 pip install -r requirements.txt -r requirements-dev.txt
 python -m pytest -q
 ```
+
+12 tests, no API key needed: local-mode upload and cited answers, an unanswerable question, the OpenAI path with a fake client, sample-document seeding, and validation. CI also builds the frontend.
 
 ## Author
 

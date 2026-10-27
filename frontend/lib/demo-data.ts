@@ -1,4 +1,4 @@
-/** Synthetic UI data — mirrors patterns from KB admin / audit products (not persisted). */
+/** Sample data for the console screens that the API does not back yet (not persisted). */
 
 export const contentGaps = [
   { term: "parental leave policy", count: 14, priority: "high" },
@@ -29,8 +29,8 @@ export const kbCategories = [
 ];
 
 export const suggestedPrompts = [
-  "Summarize our remote work policy with citations",
-  "What is the password rotation requirement?",
-  "Compare PTO accrual for US vs EU employees",
-  "List documents indexed in the last 7 days",
+  "How many vacation days do I get?",
+  "How should I report a phishing email?",
+  "How long do refunds take to arrive?",
+  "What are the password rules?",
 ];

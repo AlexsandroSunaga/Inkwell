@@ -43,6 +43,7 @@ export const api = {
     request<{
       status: string;
       openaiConfigured: boolean;
+      mode: "openai" | "local";
       chatModel: string;
       embedModel: string;
     }>("/health"),
@@ -69,6 +70,7 @@ export const api = {
   chat: (message: string, sessionId?: number) =>
     request<{
       sessionId: number;
+      mode: "openai" | "local";
       answer: string;
       citations: Citation[];
       retrieval: { chunkId: number; score: number; text: string }[];

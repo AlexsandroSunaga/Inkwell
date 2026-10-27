@@ -3,10 +3,11 @@ import {
   ArrowRight,
   Check,
   FileSearch,
+  Library,
   Lock,
+  ServerCog,
   Sparkles,
-  Workflow,
-  Zap,
+  TestTube2,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ProductPreview } from "@/components/marketing/ProductPreview";
@@ -14,37 +15,49 @@ import { ProductPreview } from "@/components/marketing/ProductPreview";
 const features = [
   {
     icon: FileSearch,
-    title: "Inspectable RAG",
-    desc: "Three-pane assistant, retrieval pipeline, ranked chunks, and inline citations — not a black-box chat bubble.",
+    title: "Answers with sources",
+    desc: "Every answer lists the passages it came from, with a match score for each one, so you can check it yourself.",
   },
   {
-    icon: Workflow,
-    title: "KB operations",
-    desc: "Category overview, document table with bulk select, pagination, ingestion tab, and content-gap analytics.",
-  },
-  {
-    icon: Lock,
-    title: "Production boundaries",
-    desc: "FastAPI + SQLAlchemy backend, OpenAI on server, audit log and team surfaces for enterprise storytelling.",
+    icon: Library,
+    title: "Your documents",
+    desc: "Upload PDF, Markdown or text files. They are split into passages and indexed when you upload them.",
   },
   {
     icon: Sparkles,
-    title: "Command palette",
-    desc: "⌘K navigation and dense admin shell — patterns from shadcn-admin and Linear-style product tools.",
+    title: "Works with or without OpenAI",
+    desc: "With an OpenAI key, embeddings and answers come from OpenAI. Without one, a local mode quotes the best-matching passages.",
   },
   {
-    icon: Zap,
-    title: "Deployable stack",
-    desc: "Next.js 15 dashboard + separate API — the same split clients expect on Upwork AI engagements.",
+    icon: Lock,
+    title: "Keys stay on the server",
+    desc: "The browser only talks to the API. The OpenAI key is read by the FastAPI backend and never sent to the page.",
+  },
+  {
+    icon: ServerCog,
+    title: "Easy to run",
+    desc: "A Next.js console and a FastAPI backend with SQLite. Clone it, start both, and the sample documents are already loaded.",
+  },
+  {
+    icon: TestTube2,
+    title: "Tested",
+    desc: "The backend tests and the frontend build run on every push.",
   },
 ];
 
-const logos = ["Northwind", "Helio Labs", "Packet", "Studio 14", "Meridian"];
-
 const faq = [
-  { q: "Is this a real company product?", a: "No — Halden Labs is synthetic. The architecture and UI are original portfolio work by Alexsandro Sunaga." },
-  { q: "What makes the UI “senior”?", a: "Multi-route console, grouped sidebar, evidence inspector, KB admin tables, analytics tabs, and mobile nav — not a single demo page." },
-  { q: "Can I see the API?", a: "Yes. FastAPI exposes documents, sessions, chat, and analytics. The frontend is a separate Next app." },
+  {
+    q: "Do I need an OpenAI key?",
+    a: "No. Without a key the app runs in local mode: it finds the passages that share the most words with your question and quotes them. Add a key and it uses OpenAI embeddings and gpt-4o-mini to write the answer.",
+  },
+  {
+    q: "Is Halden Labs a real company?",
+    a: "No. Halden Labs is a made-up company and the three sample documents are made up too. I built the app, from the FastAPI backend to this console.",
+  },
+  {
+    q: "Where can I see the code?",
+    a: "On GitHub: the backend is in backend/ and the Next.js console is in frontend/.",
+  },
 ];
 
 export default function MarketingPage() {
@@ -69,40 +82,30 @@ export default function MarketingPage() {
       </header>
 
       <section className="relative z-10 max-w-6xl mx-auto px-6 pt-12 pb-16 text-center sm:text-left">
-        <p className="text-sm text-slate-500 mb-4">Full-stack AI portfolio · Alexsandro Sunaga</p>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight max-w-4xl leading-[1.1] mx-auto sm:mx-0">
-          Enterprise knowledge UI —{" "}
+          Ask your documents.{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-            built like shipping software
+            Get answers with sources.
           </span>
         </h1>
         <p className="mt-6 text-lg text-slate-400 max-w-2xl leading-relaxed mx-auto sm:mx-0">
-          UI patterns referenced from production RAG consoles, KB admin kits, and shadcn-style dashboards:
-          command menu, audit log, content gaps, and an evidence inspector clients can click through on a call.
+          Upload policies and handbooks, then ask questions in plain language. Each answer shows the passages it
+          came from and how closely they matched, so people can check before they act.
         </p>
         <div className="mt-10 flex flex-wrap gap-4 justify-center sm:justify-start">
-          <Link href="/dashboard">
+          <Link href="/dashboard/chat">
             <Button size="lg" className="gap-2">
-              Launch console <ArrowRight className="h-4 w-4" />
+              Try the assistant <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
-          <a href="https://github.com/AlexsandroSunaga" target="_blank" rel="noreferrer">
-            <Button variant="secondary" size="lg">GitHub profile</Button>
+          <a href="https://github.com/AlexsandroSunaga/Inkwell" target="_blank" rel="noreferrer">
+            <Button variant="secondary" size="lg">View the code</Button>
           </a>
         </div>
       </section>
 
       <section id="product" className="relative z-10 px-6 pb-24">
         <ProductPreview />
-      </section>
-
-      <section className="relative z-10 border-y border-slate-800/80 py-10">
-        <p className="text-center text-xs uppercase tracking-widest text-slate-600 mb-6">Trusted by teams (demo)</p>
-        <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 text-slate-500 font-semibold">
-          {logos.map((l) => (
-            <span key={l}>{l}</span>
-          ))}
-        </div>
       </section>
 
       <section id="features" className="relative z-10 max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -123,12 +126,13 @@ export default function MarketingPage() {
       <section className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
         <div className="glass rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold">Console included in every demo</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">What is in the console</h2>
             <p className="text-slate-400 mt-4 leading-relaxed">
-              8+ dashboard routes: overview alerts, assistant, knowledge base, analytics tabs, audit log, team, integrations, settings.
+              The assistant, the knowledge base, usage analytics, an audit log, team roles, integrations and settings.
+              Some screens, such as the audit log and team list, show sample data.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-slate-300">
-              {["⌘K command palette", "Collapsible sidebar + mobile drawer", "Recharts usage & corpus views", "Radix dialogs & menus"].map((item) => (
+              {["Assistant with an evidence panel", "Document upload and chunk counts", "Usage and corpus charts", "⌘K command palette"].map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-emerald-400" /> {item}
                 </li>
@@ -136,11 +140,11 @@ export default function MarketingPage() {
             </ul>
           </div>
           <div className="rounded-2xl border border-slate-700 bg-slate-900/50 p-6">
-            <p className="text-sm text-slate-500">Starter tier (demo)</p>
-            <p className="text-4xl font-bold mt-2">$0</p>
-            <p className="text-xs text-slate-600 mt-1">Self-host · bring your OpenAI key</p>
-            <Link href="/dashboard" className="block mt-6">
-              <Button className="w-full">Get started</Button>
+            <p className="text-sm text-slate-500">Self-hosted</p>
+            <p className="text-4xl font-bold mt-2">Free</p>
+            <p className="text-xs text-slate-600 mt-1">Runs locally. Add an OpenAI key for model-written answers.</p>
+            <Link href="/dashboard/chat" className="block mt-6">
+              <Button className="w-full">Ask a question</Button>
             </Link>
           </div>
         </div>
@@ -157,7 +161,7 @@ export default function MarketingPage() {
       </section>
 
       <footer className="relative z-10 border-t border-slate-800 py-8 text-center text-sm text-slate-500">
-        Synthetic Halden data · UI references: shadcn-admin, KB admin kits, RAG frontend architecture guides
+        Halden Labs is a fictional company. The sample documents and some console screens use made-up data.
       </footer>
     </div>
   );

@@ -7,6 +7,7 @@ from pathlib import Path
 # Environment variables take precedence over any local .env file.
 _tmp = tempfile.mkdtemp(prefix="inkwell-tests-")
 os.environ["OPENAI_API_KEY"] = ""
+os.environ["SEED_SAMPLES"] = "false"
 os.environ["DATABASE_URL"] = f"sqlite:///{Path(_tmp, 'test.db').as_posix()}"
 
 ROOT = Path(__file__).resolve().parent.parent

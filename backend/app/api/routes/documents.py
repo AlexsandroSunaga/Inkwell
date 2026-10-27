@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.config import settings
 from app.db import embedding_to_json, get_db
 from app.models import Chunk, Document
+from app.services import local_mode
 from app.services.ingest import chunk_text, extract_text
 from app.services.openai_client import openai_client
 
@@ -40,14 +41,12 @@ def delete_document(doc_id: int, db: Session = Depends(get_db)) -> dict:
 
 @router.post("/documents/upload")
 async def upload_document(file: UploadFile = File(...), db: Session = Depends(get_db)) -> dict:
-    if not settings.openai_api_key:
-        raise HTTPException(503, "OPENAI_API_KEY required for ingestion (embeddings)")
     raw = await file.read()
     text = extract_text(file.filename or "upload.txt", raw)
     if not text:
         raise HTTPException(400, "No text extracted from file")
     pieces = chunk_text(text)
-    vectors = await openai_client.embed(pieces)
+    vectors = await openai_client.embed(pieces) if settings.openai_api_key else local_mode.embed(pieces)
     doc = Document(title=file.filename or "Untitled", filename=file.filename or "upload.txt")
     db.add(doc)
     db.flush()

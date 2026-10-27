@@ -98,7 +98,7 @@ export function AppSidebar({ mobile }: { mobile?: boolean }) {
         )}
         {!collapsed && (
           <p className="text-[10px] text-slate-600 leading-tight">
-            Portfolio · Alexsandro Sunaga
+            Halden Labs (fictional) · sample data
           </p>
         )}
       </div>

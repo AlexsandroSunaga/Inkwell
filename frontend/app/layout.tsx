@@ -7,7 +7,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "Inkwell",
-  description: "Enterprise-style internal knowledge platform — portfolio product",
+  description: "Ask your documents and get answers with sources",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

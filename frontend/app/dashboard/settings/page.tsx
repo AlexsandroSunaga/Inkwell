@@ -13,7 +13,7 @@ export default function SettingsPage() {
         setEnv({
           chat: h.chatModel ?? "",
           embed: h.embedModel ?? "",
-          api: h.openaiConfigured ? "Server-side key configured" : "Missing OPENAI_API_KEY on API",
+          api: h.openaiConfigured ? "Server-side key configured" : "No key set: running in local mode",
         })
       );
   }, []);

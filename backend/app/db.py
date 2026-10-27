@@ -37,6 +37,9 @@ def get_db() -> Generator[Session, None, None]:
 
 
 def cosine_similarity(a: list[float], b: list[float]) -> float:
+    # Vectors from different embedding models have different sizes and cannot be compared.
+    if len(a) != len(b):
+        return 0.0
     dot = sum(x * y for x, y in zip(a, b))
     na = sum(x * x for x in a) ** 0.5
     nb = sum(y * y for y in b) ** 0.5

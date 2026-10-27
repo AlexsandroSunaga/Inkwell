@@ -73,7 +73,7 @@ export default function AnalyticsPage() {
           <Tabs.Content value="usage" className="space-y-6">
             <div className="grid sm:grid-cols-3 gap-4">
               <div className="glass rounded-xl p-4">
-                <p className="text-xs text-slate-500 uppercase">Search-to-answer (demo)</p>
+                <p className="text-xs text-slate-500 uppercase">Search-to-answer (sample data)</p>
                 <p className="text-2xl font-semibold mt-2">78%</p>
               </div>
               <div className="glass rounded-xl p-4">
@@ -86,7 +86,7 @@ export default function AnalyticsPage() {
               </div>
             </div>
             <div className="glass rounded-2xl p-6 h-72">
-              <h2 className="font-semibold mb-4 text-sm">Queries & deflection (illustrative)</h2>
+              <h2 className="font-semibold mb-4 text-sm">Queries & deflection (sample data)</h2>
               <ResponsiveContainer width="100%" height="85%">
                 <AreaChart data={trendDemo}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#334155" />

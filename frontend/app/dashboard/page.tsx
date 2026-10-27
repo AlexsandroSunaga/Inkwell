@@ -76,7 +76,7 @@ export default function DashboardOverview() {
               <div className="flex justify-between">
                 <dt className="text-slate-500">OpenAI</dt>
                 <dd className={health.openai ? "text-emerald-400" : "text-amber-400"}>
-                  {health.openai ? "Connected" : "Not configured"}
+                  {health.openai ? "Connected" : "No key (local mode)"}
                 </dd>
               </div>
               <div className="flex justify-between gap-4">
