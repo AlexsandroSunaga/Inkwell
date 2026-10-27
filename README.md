@@ -76,15 +76,6 @@ npm run dev
 - **Settings** + **Integrations** (OpenAI status, server-side keys)
 - **Backend**: FastAPI + SQLAlchemy + OpenAI embeddings/chat + `/analytics`
 
-### UI references (patterns only — not copied assets)
-
-- [satnaing/shadcn-admin](https://github.com/satnaing/shadcn-admin) — command menu, dense admin shell
-- [shadcn sidebar + command block](https://www.shadcn.io/blocks/sidebar-with-command-menu) — ⌘K in sidebar
-- [Help Desk Kit — KB screens](https://thefrontkit.com/docs/help-desk-kit/knowledge-base-screens) — categories, gaps, analytics
-- [Refine KB admin use case](https://refine.dev/use-cases/customer-support/knowledge-base-admin/) — review queue, publishing status
-- [RAG frontend architecture (React)](https://ai-powered-seo-audit.hashnode.dev/rag-frontend-architecture-react-tailwind-motion) — 3-pane shell, retrieval status, source panel
-- [Automatos chatbot UX PRD](https://docs.automatos.app/automatos-ai-docs/design-docs/prds/31-chatbot-ux-upgrade) — inspector, sources cards, tool traces
-
 ## Not included (typical client work)
 
 Clerk/Auth0 SSO, Stripe billing, pgvector at scale, S3, multi-tenant RBAC — typically scoped per deployment.
