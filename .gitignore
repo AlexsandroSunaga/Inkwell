@@ -12,3 +12,4 @@ __pycache__/
 *.db
 **/data/*.db
 .DS_Store
+*.tsbuildinfo
